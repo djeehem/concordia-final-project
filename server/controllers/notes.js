@@ -1,4 +1,5 @@
-import PostNote from "../models/postNote.js"
+import mongoose  from 'mongoose';
+import PostNote from '../models/postNote.js';
 
 const getNotes = async (req, res) => {
   try {
@@ -36,4 +37,34 @@ const createNote = async (req, res) => {
   }
 };
 
-export { getNotes, createNote };
+const updateNote = async (req, res) => {
+  const { id } = req.params;
+  const { title, note, selectedFile } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No note found with that id');
+  };
+
+  
+  const updatedNote = { title, note, selectedFile, _id: id };
+  
+  await PostNote.findByIdAndUpdate(id, updatedNote, { new: true });
+
+  res.json(updatedNote);
+};
+
+const deleteNote = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No note found with that id');
+  };
+
+  await PostNote.findByIdAndRemove(id);
+
+  res.json({
+    Message: 'Note deleted'
+  });
+};
+
+export { getNotes, createNote, updateNote, deleteNote };
