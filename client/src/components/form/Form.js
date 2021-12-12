@@ -4,13 +4,17 @@ import styled from 'styled-components';
 
 import { addNote, modifyNote } from '../../api/index'
 import { NoteContext } from '../NoteContext';
+import { fetchNotes } from '../../api/index'
 
 const Form = () => {
   const { notes,
       createNote,
       updateNote,
       currentId,
-      setCurrentId
+      setCurrentId,
+      currentUser,
+      userIsAuthenticated,
+      getNotes
   } = useContext(NoteContext);
   
   const noteToUpdate = notes.find(note => note._id === currentId);
@@ -18,8 +22,11 @@ const Form = () => {
   const [noteData, setNoteData] = useState({
     title: '',
     note: '',
-    selectedFile: ''
+    selectedFile: '',
+    email: ''
   })
+
+  console.log(currentUser)
 
   useEffect(() => {
     if (noteToUpdate) {
@@ -28,26 +35,37 @@ const Form = () => {
   }, [noteToUpdate])
 
   const clear = () => {
+    console.log(456)
     setCurrentId(null)
     setNoteData({
       title: '',
       note: '',
-      selectedFile: ''
+      selectedFile: '',
+      email: ''
     })
   }
+  
   const handleSubmit = (ev) => {
     ev.preventDefault();
 
     if (noteData.title || noteData.note) {
       if (currentId === null) {
-        console.log(`Add`)
-        addNote(noteData)
-        .then(data => {
+        console.log(currentUser.email)
+
+        console.log(noteData)
+        addNote({...noteData, email: currentUser.email})
+          .then(data => {
           createNote(data.data)
+        })
+        // .then(() => fetchNotes(currentUser.email))
+        .then(() => fetchNotes())
+        .then(data => {
+          console.log(123)
+          getNotes(data.data)
         })
       } else {
         modifyNote(currentId, noteData)
-        .then(data => {
+          .then(data => {
           updateNote(data.data)
         })
       }
@@ -56,14 +74,16 @@ const Form = () => {
   }
 
   return (
-    <>
+    // userIsAuthenticated && (
+      
+      <>
       <h1>{ currentId ? 'Edit' : 'Create' } note</h1>
       <NoteForm onSubmit={ handleSubmit }>
         <label>
           <input placeholder={'Title'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
         </label>
         <label>
-          <textarea placeholder={'Your note here'} value={noteData.note} onChange={(ev) => setNoteData({ ...noteData, note: ev.target.value })} />
+          <textarea placeholder={'Your note here'} value={noteData.note} onChange={(ev) => setNoteData({ ...noteData, note: ev.target.value})} />
         </label>
         <NoteImageWrapper>
           {/* <div>
@@ -81,6 +101,7 @@ const Form = () => {
         <input type="submit" value="Save" />
       </NoteForm>
     </>
+    // )
   )
 }
 

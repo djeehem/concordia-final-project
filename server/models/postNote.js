@@ -7,7 +7,8 @@ const noteSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     default: new Date()
-  }
+  },
+  email: String
 });
 
 const PostNote = mongoose.model('PostNote', noteSchema);

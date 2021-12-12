@@ -2,7 +2,10 @@ import mongoose  from 'mongoose';
 import PostNote from '../models/postNote.js';
 
 const getNotes = async (req, res) => {
+
+  // const email = req.body;
   try {
+    // const postNotes = await PostNote.find({ email: email });
     const postNotes = await PostNote.find();
 
     res.status(200).json({
@@ -39,14 +42,14 @@ const createNote = async (req, res) => {
 
 const updateNote = async (req, res) => {
   const { id } = req.params;
-  const { title, note, selectedFile } = req.body;
+  const { title, note, selectedFile, email } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send('No note found with that id');
   };
 
   
-  const updatedNote = { title, note, selectedFile, _id: id };
+  const updatedNote = { title, note, selectedFile, email, _id: id };
   
   await PostNote.findByIdAndUpdate(id, updatedNote, { new: true });
 

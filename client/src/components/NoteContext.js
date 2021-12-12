@@ -1,7 +1,7 @@
 import React, {createContext, useReducer, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { fetchNotes } from '../api/index'
+import { fetchNotes } from '../api/index';
 import { GET_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE } from '../constants/actionsTypes';
 
 export const NoteContext = createContext(null);
@@ -41,7 +41,7 @@ export const NoteProvider = ({ children }) => {
   const [notes, dispatch] = useReducer(reducer, initialState);
 
   const [currentId, setCurrentId] = useState(null)
-
+  
   const getNotes = (data) => {
     dispatch({
       type: GET_NOTES,
@@ -50,9 +50,10 @@ export const NoteProvider = ({ children }) => {
   };
 
   const createNote = (data) => {
+    console.log(data)
     dispatch({
       type: CREATE_NOTE,
-      payload: data,
+      payload: data
     });
   };
 
@@ -71,26 +72,20 @@ export const NoteProvider = ({ children }) => {
     })
   }
 
-  // useEffect(() => {
-  //   fetchNotes()
+  // if (user !== undefined) {
+  //   fetchNotes(user.email)
   //     .then(data => {
+  //       console.log(data)
   //       getNotes(data.data)
   //     })
-  // }, []);
-
-  useEffect(() => {
-    fetchNotes()
-      .then(data => {
-        getNotes(data.data)
-      })
-  }, [currentId]);
-
-  // useEffect(() => {
-  //   fetchNotes()
-  //     .then(data => {
-  //       getNotes(data.data)
-  //     })
-  // }, [notes]);
+  // }
+useEffect(() => {
+  fetchNotes()
+  .then(data => {
+    console.log(data)
+    getNotes(data.data)
+  })
+}, [])
 
   return (
     <NoteContext.Provider
@@ -103,7 +98,7 @@ export const NoteProvider = ({ children }) => {
         setCurrentId,
         deleteNote,
         currentUser: user,
-        userIsAuthenticate :isAuthenticated,
+        userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading
       }}
     >

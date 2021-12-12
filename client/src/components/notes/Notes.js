@@ -8,26 +8,18 @@ import { NoteContext } from '../NoteContext';
 const Notes = () => {
   const {
     notes,
-    // getNotes,
-    // currentId,
-    // setCurrentId
   } = useContext(NoteContext);
 
-  console.log(notes)
-
   return (
-    <>
-      {/* {notes && */}
-        <Grid>       
-          {notes.map(note => (
-            <Note
-              key={note._id} note={note}
-              // setCurrentId={setCurrentId}
-            />
-          ))}
-        </Grid>
-      {/* } */}
-    </>
+    <Grid>       
+      {notes && notes.map(note => {
+        return (
+          <Note
+            key={note._id} note={note}
+          />
+        )
+      })}
+    </Grid>
   )
 }
 

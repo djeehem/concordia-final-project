@@ -27,6 +27,8 @@ const Note = ({ note }) => {
           <button onClick={ handleDelete }>Delete</button>
           <h4><b>{note.title}</b></h4>
           <p>{note.note}</p>
+          {console.log(note._id)}
+          {console.log(note)}
         </Container>
       </Card>
     </Wrapper>
