@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-const GameOverModal = ({}) => {
+import Form from './form/Form'
+import { NoteContext } from '../components/NoteContext';
+
+const NoteModal = () => {
+  const {
+    modalOpen
+} = useContext(NoteContext);
+
   return (
+    modalOpen && (
     <Wrapper>
       <Content>
-        <Heading>You ___ !!🤩😱</Heading>
-        <Word>👉 the word 👈</Word>
+        <Form />
       </Content>
     </Wrapper>
+    )
   );
 };
 
@@ -22,7 +30,7 @@ const Wrapper = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 2;
+  z-index: 20;
 `;
 const Content = styled.div`
   background: white;
@@ -31,19 +39,11 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 200px;
-  width: 300px;
+  height: 500px;
+  width: 800px;
+  /* height: 80vh;
+  height: 80vw; */
   padding: 20px;
 `;
-const Heading = styled.p`
-  font-size: 32px;
-  font-weight: 700;
-  text-align: center;
-`;
-const Word = styled.p`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 18px 0;
-`;
 
-export default GameOverModal;
+export default NoteModal;

@@ -4,17 +4,19 @@ import styled from 'styled-components';
 
 import { addNote, modifyNote } from '../../api/index'
 import { NoteContext } from '../NoteContext';
-import { fetchNotes } from '../../api/index'
+import { fetchNotes } from '../../api/index';
 
 const Form = () => {
-  const { notes,
-      createNote,
-      updateNote,
-      currentId,
-      setCurrentId,
-      currentUser,
-      userIsAuthenticated,
-      getNotes
+  const {
+    notes,
+    createNote,
+    updateNote,
+    currentId,
+    setCurrentId,
+    currentUser,
+    userIsAuthenticated,
+    getNotes,
+    setModalOpen
   } = useContext(NoteContext);
   
   const noteToUpdate = notes.find(note => note._id === currentId);
@@ -70,6 +72,7 @@ const Form = () => {
         })
       }
       clear();
+      setModalOpen(false);
     }
   }
 
@@ -82,6 +85,7 @@ const Form = () => {
         <label>
           <input placeholder={'Title'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
         </label>
+        <Division />
         <label>
           <textarea placeholder={'Your note here'} value={noteData.note} onChange={(ev) => setNoteData({ ...noteData, note: ev.target.value})} />
         </label>
@@ -98,6 +102,7 @@ const Form = () => {
           />
         </NoteImageWrapper>
         <Button onClick={ clear }>Clear</Button>
+        <Button onClick={ () => setModalOpen(false) }>Cancel</Button>
         <input type="submit" value="Save" />
       </NoteForm>
     </>
@@ -108,6 +113,13 @@ const Form = () => {
 const NoteForm = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+const Division = styled.div`
+  border-bottom: 1px solid grey;
+  /* width: 80%;
+  align-self: center; */
+  margin: 10px;
 `;
 
 const NoteImageWrapper = styled.div`

@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import LoginButton from './LoginButton';
 import LogoutButton from "./LogoutButton";
 import Profile from './Profile';
+import { NoteContext } from "./NoteContext";
 
 const NavBar = () => {
-  const user = null;
+  const { setModalOpen, currentUser } = useContext(NoteContext);
+
+  const handleCreateNoteModal = () => {
+
+  }
 
   return (
     <Wrapper>
-
+          <button onClick={ () => setModalOpen(true) }>Create note</button>
           <Searchbar>
 
           </Searchbar>
           <Toolbar>
-            {user ? (
+            {currentUser ? (
               <>
-                {/* <span>{user.name}</span> */}
-                
-              </>
+                <LogoutButton />
+                <Profile />
+                </>
             ) : (
-              <>
               <LoginButton />
-              <LogoutButton />
-              <Profile />
-              </>
             )}
           </Toolbar>
     </Wrapper>

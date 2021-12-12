@@ -6,8 +6,6 @@ import { GET_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE } from '../constants/a
 
 export const NoteContext = createContext(null);
 
-
-
 const initialState = [];
 
 const reducer = (notes, action) => {
@@ -36,11 +34,11 @@ const reducer = (notes, action) => {
 export const NoteProvider = ({ children }) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  console.log(user)
-
   const [notes, dispatch] = useReducer(reducer, initialState);
 
-  const [currentId, setCurrentId] = useState(null)
+  const [currentId, setCurrentId] = useState(null);
+
+  const [modalOpen, setModalOpen] = useState(false);
   
   const getNotes = (data) => {
     dispatch({
@@ -99,7 +97,9 @@ useEffect(() => {
         deleteNote,
         currentUser: user,
         userIsAuthenticated :isAuthenticated,
-        userIsLoading: isLoading
+        userIsLoading: isLoading,
+        modalOpen,
+        setModalOpen
       }}
     >
       {children}

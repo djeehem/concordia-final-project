@@ -8,12 +8,18 @@ import { NoteContext } from '../../NoteContext';
 const Note = ({ note }) => {
   const {
     setCurrentId,
-    deleteNote
+    deleteNote,
+    setModalOpen
   } = useContext(NoteContext);
 
   const handleDelete = () => {
     removeNote(note._id);
     deleteNote(note._id);
+  }
+
+  const handleEdit = () => {
+    setCurrentId(note._id);
+    setModalOpen(true);
   }
 
   return (
@@ -23,7 +29,7 @@ const Note = ({ note }) => {
       />
       <Card>
         <Container>
-          <button onClick={() => setCurrentId(note._id)}>Edit</button>
+          <button onClick={ handleEdit }>Edit</button>
           <button onClick={ handleDelete }>Delete</button>
           <h4><b>{note.title}</b></h4>
           <p>{note.note}</p>
