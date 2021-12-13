@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GlobalStyles from '../src/components/GlobalStyles';
-import Notes from './components/notes/Notes';
+import NoteList from '../src/components/NoteList'
 import NavBar from '../src/components/NavBar';
 import NoteModal from './components/NoteModal';
 
@@ -12,7 +12,7 @@ const App = () => {
       <GlobalStyles />
       <NavBar />
       <NoteModal />
-      <Notes />
+      <NoteList />
     </>
   )
 }

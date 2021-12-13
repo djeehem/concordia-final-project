@@ -2,7 +2,7 @@ import React, {createContext, useReducer, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { fetchNotes } from '../api/index';
-import { GET_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE } from '../constants/actionsTypes';
+import { GET_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE, UPDATE_NOTE_POSITION } from '../constants/actionsTypes';
 
 export const NoteContext = createContext(null);
 
@@ -24,6 +24,9 @@ const reducer = (notes, action) => {
     }
     case DELETE_NOTE:{
       return notes.filter(note => note._id !== action.payload);
+    }
+    case UPDATE_NOTE_POSITION:{
+      return action.payload;
     }
 
     default:
@@ -68,22 +71,22 @@ export const NoteProvider = ({ children }) => {
       type: DELETE_NOTE,
       payload: id
     })
-  }
+  };
 
-  // if (user !== undefined) {
-  //   fetchNotes(user.email)
-  //     .then(data => {
-  //       console.log(data)
-  //       getNotes(data.data)
-  //     })
-  // }
-useEffect(() => {
-  fetchNotes()
-  .then(data => {
-    console.log(data)
-    getNotes(data.data)
-  })
-}, [])
+  const updateNotePosition = (data) => {
+    dispatch({
+      type: UPDATE_NOTE_POSITION,
+      payload: data
+    })
+  };
+
+  useEffect(() => {
+    fetchNotes()
+    .then(data => {
+      console.log(data)
+      getNotes(data.data)
+    })
+  }, [])
 
   return (
     <NoteContext.Provider
@@ -95,6 +98,7 @@ useEffect(() => {
         currentId,
         setCurrentId,
         deleteNote,
+        updateNotePosition,
         currentUser: user,
         userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading,

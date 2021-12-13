@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
 
 import { removeNote } from '../../../api'
 import { NoteContext } from '../../NoteContext';
 import Button from '../../Button';
 
-const Note = ({ note }) => {
+const Note = SortableElement(({ value }) => {
   const {
     setCurrentId,
     deleteNote,
@@ -13,31 +15,31 @@ const Note = ({ note }) => {
   } = useContext(NoteContext);
 
   const handleDelete = () => {
-    removeNote(note._id);
-    deleteNote(note._id);
+    removeNote(value._id);
+    deleteNote(value._id);
   }
 
   const handleEdit = () => {
-    setCurrentId(note._id);
+    setCurrentId(value._id);
     setModalOpen(true);
   }
 
   return (
-  // <Image src={note.selectedFile} />
-    <Card>
-        <Button onClick={ handleEdit }>Edit</Button>
-        <Button onClick={ handleDelete }>Delete</Button>
-        <CardTitle>{note.title}</CardTitle>
-        <CardText>{note.note}</CardText>
-    </Card>
+    // <Image src={value.selectedFile} />
+  <Card>
+    <Button onClick={ handleEdit }>Edit</Button>
+    <Button onClick={ handleDelete }>Delete</Button>
+    <CardTitle>{value.title}</CardTitle>
+    <CardText>{value.note}</CardText>
+  </Card>
   )
-};
+});
 
 const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr; */
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   height: 20rem;
   margin: 3rem;
   box-shadow: 0 0.7rem 1.2rem rgba(0, 0, 0, 0.2);

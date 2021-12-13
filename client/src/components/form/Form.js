@@ -25,7 +25,8 @@ const Form = () => {
     title: '',
     note: '',
     selectedFile: '',
-    email: ''
+    email: '',
+    position: ''
   })
 
   console.log(currentUser)
@@ -43,7 +44,8 @@ const Form = () => {
       title: '',
       note: '',
       selectedFile: '',
-      email: ''
+      email: '',
+      position: ''
     })
   }
   
@@ -55,7 +57,7 @@ const Form = () => {
         console.log(currentUser.email)
 
         console.log(noteData)
-        addNote({...noteData, email: currentUser.email})
+        addNote({...noteData, email: currentUser.email, position: notes.length})
           .then(data => {
           createNote(data.data)
         })
