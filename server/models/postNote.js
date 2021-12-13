@@ -8,7 +8,9 @@ const noteSchema = mongoose.Schema({
     type: Date,
     default: new Date()
   },
-  email: String
+  email: String,
+  // position: Number,
+  // index: Number
 });
 
 const PostNote = mongoose.model('PostNote', noteSchema);

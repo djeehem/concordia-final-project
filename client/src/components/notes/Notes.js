@@ -24,12 +24,14 @@ const Notes = () => {
 }
 
 const Grid = styled.div`
-  max-width: 100%;
+  /* max-width: 100%;
   justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  text-align: center;
+  text-align: center; */
 `;
+
+
 
 export default Notes;

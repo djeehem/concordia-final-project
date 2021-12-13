@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { addNote, modifyNote } from '../../api/index'
 import { NoteContext } from '../NoteContext';
 import { fetchNotes } from '../../api/index';
+import Button from '../Button'
 
 const Form = () => {
   const {
@@ -14,7 +15,6 @@ const Form = () => {
     currentId,
     setCurrentId,
     currentUser,
-    userIsAuthenticated,
     getNotes,
     setModalOpen
   } = useContext(NoteContext);
@@ -93,8 +93,8 @@ const Form = () => {
           {/* <div>
             <label for="favcolor">Select color:</label>
             <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
-          </div>
-          <span> or </span> */}
+          </div> */}
+          <span> or </span>
           <FileBase
             type="file"
             multiple={false}
@@ -103,7 +103,7 @@ const Form = () => {
         </NoteImageWrapper>
         <Button onClick={ clear }>Clear</Button>
         <Button onClick={ () => setModalOpen(false) }>Cancel</Button>
-        <input type="submit" value="Save" />
+        <SaveButton type="submit" value="Save">Save</SaveButton>
       </NoteForm>
     </>
     // )
@@ -113,6 +113,8 @@ const Form = () => {
 const NoteForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
 
 const Division = styled.div`
@@ -127,8 +129,12 @@ const NoteImageWrapper = styled.div`
   align-items: baseline;
 `;
 
-const Button = styled.button`
+const SaveButton = styled(Button)`
 
 `;
+
+// const Button = styled.button`
+
+// `;
 
 export default Form;

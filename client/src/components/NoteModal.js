@@ -39,10 +39,8 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 500px;
-  width: 800px;
-  /* height: 80vh;
-  height: 80vw; */
+  height: 60%;
+  width: 60%;
   padding: 20px;
 `;
 

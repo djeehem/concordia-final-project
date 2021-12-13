@@ -6,6 +6,7 @@ import LoginButton from './LoginButton';
 import LogoutButton from "./LogoutButton";
 import Profile from './Profile';
 import { NoteContext } from "./NoteContext";
+import Button from './Button'
 
 const NavBar = () => {
   const { setModalOpen, currentUser } = useContext(NoteContext);
@@ -16,7 +17,7 @@ const NavBar = () => {
 
   return (
     <Wrapper>
-          <button onClick={ () => setModalOpen(true) }>Create note</button>
+          <Button onClick={ () => setModalOpen(true) }>Create note</Button>
           <Searchbar>
 
           </Searchbar>
@@ -76,6 +77,8 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+
+
 const Searchbar = styled.div`
 
 `;
@@ -84,6 +87,9 @@ const Toolbar = styled.div`
 
 `;
 
+const Button2 = styled(Button)`
+
+`;
 
 
 export default NavBar;
