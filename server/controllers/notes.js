@@ -3,10 +3,11 @@ import PostNote from '../models/postNote.js';
 
 const getNotes = async (req, res) => {
 
-  // const email = req.body;
+  const email = req.params;
+  console.log(email)
   try {
-    // const postNotes = await PostNote.find({ email: email });
-    const postNotes = await PostNote.find();
+    const postNotes = await PostNote.find(email).exec();
+    // const postNotes = await PostNote.find();
 
     res.status(200).json({
       status: 200,
@@ -47,7 +48,6 @@ const updateNote = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send('No note found with that id');
   };
-
   
   const updatedNote = { title, note, selectedFile, email, _id: id };
   

@@ -4,7 +4,7 @@ import { getNotes, createNote, updateNote, deleteNote } from '../controllers/not
 
 const router = express.Router();
 
-router.get('/', getNotes)
+router.get('/:email', getNotes)
 router.post('/', createNote)
 router.patch('/:id', updateNote)
 router.delete('/:id', deleteNote)

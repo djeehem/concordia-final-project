@@ -61,8 +61,8 @@ const Form = () => {
           .then(data => {
           createNote(data.data)
         })
-        // .then(() => fetchNotes(currentUser.email))
-        .then(() => fetchNotes())
+        .then(() => fetchNotes(currentUser.email))
+        // .then(() => fetchNotes())
         .then(data => {
           console.log(123)
           getNotes(data.data)

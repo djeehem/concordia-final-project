@@ -26,7 +26,7 @@ const reducer = (notes, action) => {
       return notes.filter(note => note._id !== action.payload);
     }
     case UPDATE_NOTE_POSITION:{
-      return action.payload;
+      return notes.map
     }
 
     default:
@@ -73,6 +73,8 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
+  console.log(user)
+
   const updateNotePosition = (data) => {
     dispatch({
       type: UPDATE_NOTE_POSITION,
@@ -81,12 +83,23 @@ export const NoteProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchNotes()
-    .then(data => {
-      console.log(data)
-      getNotes(data.data)
-    })
-  }, [])
+    if (user !== undefined) {
+      const email = user.email
+      fetchNotes(email)
+      .then(data => {
+        console.log(data)
+        getNotes(data.data)
+      })
+    }
+  }, [user])
+
+  // useEffect(() => {
+  //   fetchNotes()
+  //   .then(data => {
+  //     console.log(data)
+  //     getNotes(data.data)
+  //   })
+  // }, [])
 
   return (
     <NoteContext.Provider
