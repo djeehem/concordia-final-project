@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { addNote, modifyNote } from '../../api/index'
 import { NoteContext } from '../NoteContext';
 import { fetchNotes } from '../../api/index';
+import ColorPicker from '../ColorPicker';
 import Button from '../Button'
 
 const Form = () => {
@@ -27,18 +28,15 @@ const Form = () => {
     selectedFile: '',
     email: '',
     position: ''
-  })
-
-  console.log(currentUser)
+  });
 
   useEffect(() => {
     if (noteToUpdate) {
       setNoteData(noteToUpdate);
     }
-  }, [noteToUpdate])
+  }, [noteToUpdate]);
 
   const clear = () => {
-    console.log(456)
     setCurrentId(null)
     setNoteData({
       title: '',
@@ -47,6 +45,11 @@ const Form = () => {
       email: '',
       position: ''
     })
+  };
+
+  const cancel = () => {
+    clear() ;
+    setModalOpen(false)
   }
   
   const handleSubmit = (ev) => {
@@ -54,17 +57,13 @@ const Form = () => {
 
     if (noteData.title || noteData.note) {
       if (currentId === null) {
-        console.log(currentUser.email)
 
-        console.log(noteData)
         addNote({...noteData, email: currentUser.email, position: notes.length})
           .then(data => {
           createNote(data.data)
         })
         .then(() => fetchNotes(currentUser.email))
-        // .then(() => fetchNotes())
         .then(data => {
-          console.log(123)
           getNotes(data.data)
         })
       } else {
@@ -79,9 +78,7 @@ const Form = () => {
   }
 
   return (
-    // userIsAuthenticated && (
-      
-      <>
+  <>
       <h1>{ currentId ? 'Edit' : 'Create' } note</h1>
       <NoteForm onSubmit={ handleSubmit }>
         <label>
@@ -91,24 +88,19 @@ const Form = () => {
         <label>
           <textarea placeholder={'Your note here'} value={noteData.note} onChange={(ev) => setNoteData({ ...noteData, note: ev.target.value})} />
         </label>
+        <ColorPicker />
         <NoteImageWrapper>
-          {/* <div>
-            <label for="favcolor">Select color:</label>
-            <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
-          </div> */}
-          <span> or </span>
-          <FileBase
+          {/* <FileBase
             type="file"
             multiple={false}
             onDone={({ base64 }) => setNoteData({ ...noteData, selectedFile: base64})}
-          />
+          /> */}
         </NoteImageWrapper>
         <Button onClick={ clear }>Clear</Button>
-        <Button onClick={ () => setModalOpen(false) }>Cancel</Button>
+        <Button onClick={ cancel }>Cancel</Button>
         <SaveButton type="submit" value="Save">Save</SaveButton>
       </NoteForm>
     </>
-    // )
   )
 }
 

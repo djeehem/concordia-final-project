@@ -4,7 +4,6 @@ import PostNote from '../models/postNote.js';
 const getNotes = async (req, res) => {
 
   const email = req.params;
-  console.log(email)
   try {
     const postNotes = await PostNote.find(email).exec();
     // const postNotes = await PostNote.find();

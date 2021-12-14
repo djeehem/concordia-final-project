@@ -51,7 +51,6 @@ export const NoteProvider = ({ children }) => {
   };
 
   const createNote = (data) => {
-    console.log(data)
     dispatch({
       type: CREATE_NOTE,
       payload: data
@@ -59,7 +58,6 @@ export const NoteProvider = ({ children }) => {
   };
 
   const updateNote = (data) => {
-    console.log(data)
     dispatch({
       type: UPDATE_NOTE,
       payload: data,
@@ -73,8 +71,6 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
-  console.log(user)
-
   const updateNotePosition = (data) => {
     dispatch({
       type: UPDATE_NOTE_POSITION,
@@ -87,19 +83,10 @@ export const NoteProvider = ({ children }) => {
       const email = user.email
       fetchNotes(email)
       .then(data => {
-        console.log(data)
         getNotes(data.data)
       })
     }
   }, [user])
-
-  // useEffect(() => {
-  //   fetchNotes()
-  //   .then(data => {
-  //     console.log(data)
-  //     getNotes(data.data)
-  //   })
-  // }, [])
 
   return (
     <NoteContext.Provider
