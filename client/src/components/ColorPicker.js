@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { CirclePicker } from 'react-color';
+import styled from 'styled-components';
 
-
+import { NoteContext } from './NoteContext';
+import Button from './Button';
 
 const ColorPicker = () => {
-  const [color, setColor] = useState('#fff')
-  const [showColorPicker, setShowColorPicker] = useState(false)
+  const {
+    noteData,
+    setNoteData
+  } = useContext(NoteContext)
+
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  console.log(noteData)
 
   return (
     <div>
-      <button
-        onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}
+      <ColorButton
+        onClick={(ev) => {
+          ev.preventDefault();
+          setShowColorPicker(showColorPicker => !showColorPicker)}
+        }
       >
-        {showColorPicker ? 'Close color picker' : 'Pick a color'}
-      </button>
+        {showColorPicker ? 'Close' : 'Pick a color'}
+      </ColorButton>
       {showColorPicker && (
         <CirclePicker
-          color={color}
-          onChange={updatedColor => setColor(updatedColor.hex)}
+          onChange={(ev) => {
+            setNoteData({ ...noteData, noteColor: ev.hex})
+          }}
         />
       )}
-      <h2>You picked {color}</h2>
+      <h2>Color: {noteData.noteColor}</h2>
     </div>
   )
 };
+const ColorButton = styled(Button)`
+
+`;
 
 export default ColorPicker;

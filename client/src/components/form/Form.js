@@ -17,18 +17,15 @@ const Form = () => {
     setCurrentId,
     currentUser,
     getNotes,
-    setModalOpen
+    setModalOpen,
+    noteData,
+    setNoteData,
+    color
   } = useContext(NoteContext);
   
   const noteToUpdate = notes.find(note => note._id === currentId);
 
-  const [noteData, setNoteData] = useState({
-    title: '',
-    note: '',
-    selectedFile: '',
-    email: '',
-    position: ''
-  });
+
 
   useEffect(() => {
     if (noteToUpdate) {
@@ -41,7 +38,7 @@ const Form = () => {
     setNoteData({
       title: '',
       note: '',
-      selectedFile: '',
+      noteColor: '',
       email: '',
       position: ''
     })

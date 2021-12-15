@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const noteSchema = mongoose.Schema({
   title: String,
   note: String,
-  selectedFile: String,
+  noteColor: String,
   createdAt: {
     type: Date,
     default: new Date()

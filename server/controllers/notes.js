@@ -42,13 +42,13 @@ const createNote = async (req, res) => {
 
 const updateNote = async (req, res) => {
   const { id } = req.params;
-  const { title, note, selectedFile, email } = req.body;
+  const { title, note, noteColor, email } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send('No note found with that id');
   };
   
-  const updatedNote = { title, note, selectedFile, email, _id: id };
+  const updatedNote = { title, note, noteColor, email, _id: id };
   
   await PostNote.findByIdAndUpdate(id, updatedNote, { new: true });
 

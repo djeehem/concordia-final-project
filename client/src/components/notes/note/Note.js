@@ -23,18 +23,22 @@ const Note = SortableElement(({ value }) => {
     setModalOpen(true);
   }
 
+  console.log(value)
+
   return (
     // <Image src={value.selectedFile} />
-  <Card>
-    <Header>
-      <CardTitle>{value.title}</CardTitle>
-      <Buttons>
-        <Button onClick={ handleEdit }>Edit</Button>
-        <Button onClick={ handleDelete }>Delete</Button>
-      </Buttons>
-    </Header>
-    <CardText>{value.note}</CardText>
-  </Card>
+    <Card
+      style={ value.noteColor ? { border: `0.2rem solid ${value.noteColor}` } : { border: `0.2rem solid #DCDCDC` }}
+      >
+      <Header>
+        <CardTitle>{value.title}</CardTitle>
+        <Buttons>
+          <Button onClick={ handleEdit }>Edit</Button>
+          <Button onClick={ handleDelete }>Delete</Button>
+        </Buttons>
+      </Header>
+      <CardText>{value.note}</CardText>
+    </Card>
   )
 });
 
@@ -48,7 +52,7 @@ const Card = styled.div`
   box-shadow: 0 0.7rem 1.2rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s;
-  border: 0.05rem solid #DCDCDC;
+
   border-radius: 1rem;
 
   &:hover {

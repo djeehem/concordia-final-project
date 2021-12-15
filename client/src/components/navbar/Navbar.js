@@ -14,26 +14,33 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <Button onClick={ () => setModalOpen(true) }>Create note</Button>
-      <Searchbar />
-      <Toolbar>
-        {currentUser ? (
-          <>
-            <LogoutButton />
-            <Profile />
-          </>
-        ) : (
-          <LoginButton />
-        )}
-      </Toolbar>
+      <InnerWrapper>
+        <Button onClick={ () => setModalOpen(true) }>Create note</Button>
+        <Searchbar />
+        <Toolbar>
+          {currentUser ? (
+            <>
+              <LogoutButton />
+              <Profile />
+            </>
+          ) : (
+            <LoginButton />
+          )}
+        </Toolbar>
+        </InnerWrapper>
     </Wrapper>
   )
 };
 
 const Wrapper = styled.header`
+  height: 5rem;
+`;
+
+const InnerWrapper = styled.header`
   display: flex;
   justify-content: space-between;
-  height: 4rem;
+  margin: 2rem;
+  align-items: center;
 `;
 
 const Toolbar = styled.div``;

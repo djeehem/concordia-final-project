@@ -78,6 +78,16 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
+  const [noteData, setNoteData] = useState({
+    title: '',
+    note: '',
+    noteColor: '',
+    email: '',
+    position: ''
+  });
+
+  const [color, setColor] = useState('#DCDCDC');
+
   useEffect(() => {
     if (user !== undefined) {
       const email = user.email
@@ -103,7 +113,11 @@ export const NoteProvider = ({ children }) => {
         userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading,
         modalOpen,
-        setModalOpen
+        setModalOpen,
+        noteData,
+        setNoteData,
+        color,
+        setColor
       }}
     >
       {children}

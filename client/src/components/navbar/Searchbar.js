@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import Button from '../Button';
+
 
 
 const Searchbar = ({ suggestions, handleSelect, categories }) => {
@@ -29,7 +31,7 @@ const Searchbar = ({ suggestions, handleSelect, categories }) => {
             }
           }}
         />
-        <Button onClick={() => setValue('')}>Clear</Button>
+        <ClearButton onClick={() => setValue('')}>Clear</ClearButton>
       </StyledForm>
       {suggestionList.length > 0 && (
         <ListWrapper>
@@ -90,8 +92,8 @@ const Prediction = styled.span`
   font-weight: bold;
 `;
 
-const Button = styled.button`
-  width: 20%;
+const ClearButton = styled(Button)`
+  /* width: 20%;
   color: white;
   background-color: blue;
   border-radius: 3px;
@@ -101,7 +103,7 @@ const Button = styled.button`
 
   &:focus {
     outline: 2px solid #82abed;
-  }
+  } */
 `;
 
 const ListWrapper = styled.div`
