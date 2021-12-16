@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { SortableElement } from "react-sortable-hoc";
+import ReactHtmlParser from "react-html-parser";
 
 import { removeNote } from '../../../api'
 import { NoteContext } from '../../NoteContext';
@@ -29,7 +30,7 @@ const Note = SortableElement(({ value }) => {
     // <Image src={value.selectedFile} />
     <Card
       style={ value.noteColor ? { border: `0.2rem solid ${value.noteColor}` } : { border: `0.2rem solid #DCDCDC` }}
-      >
+    >
       <Header>
         <CardTitle>{value.title}</CardTitle>
         <Buttons>
@@ -37,22 +38,20 @@ const Note = SortableElement(({ value }) => {
           <Button onClick={ handleDelete }>Delete</Button>
         </Buttons>
       </Header>
-      <CardText>{value.note}</CardText>
+        <Division />
+      <CardText>{ ReactHtmlParser(value.note) }</CardText>
     </Card>
   )
 });
 
 const Card = styled.div`
-  /* display: flex;
-  flex-direction: column; */
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr; */
+  word-break: break-word;
+  overflow: hidden;
   height: 20rem;
   margin: 3rem;
   box-shadow: 0 0.7rem 1.2rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s;
-
   border-radius: 1rem;
 
   &:hover {
@@ -68,24 +67,29 @@ const Header = styled.div`
 
 const CardTitle = styled.div`
   display: flex;
-  align-self: flex-start;
+  margin-left: auto;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  /* text-decoration: underline; */
+  margin-right: 1rem;
 `;
 
 const Buttons = styled.div`
   display: flex;
-  align-self: flex-end;
-  /* grid-template-columns: 1fr 1fr; */
+  margin-left: auto;
+  gap: 0.3rem;
+`;
+
+const Division = styled.div`
+  display: flex;
+  border-bottom: 1px solid #DCDCDC;
+  width: 60%;
+  margin: auto;
 `;
 
 const CardText = styled.div`
   display: flex;
   font-size: 1.6rem;
-  align-self: center;
-  text-align: center;
   margin: 1rem;
 `;
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Editor } from "@tinymce/tinymce-react";
 import FileBase from 'react-file-base64';
 import styled from 'styled-components';
 
@@ -23,9 +24,10 @@ const Form = () => {
     color
   } = useContext(NoteContext);
   
+  // const message = noteData.note;
+  // console.log({message})
+
   const noteToUpdate = notes.find(note => note._id === currentId);
-
-
 
   useEffect(() => {
     if (noteToUpdate) {
@@ -44,10 +46,14 @@ const Form = () => {
     })
   };
 
+  const handleChange = (note, editor) => {
+    setNoteData({ ...noteData, note })
+  };
+
   const cancel = () => {
     clear() ;
     setModalOpen(false)
-  }
+  };
   
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -75,17 +81,33 @@ const Form = () => {
   }
 
   return (
-  <>
-      <h1>{ currentId ? 'Edit' : 'Create' } note</h1>
+    <>
+    {/* <h1>{ currentId ? 'Edit' : 'Create' } note</h1> */}
       <NoteForm onSubmit={ handleSubmit }>
+        <Header>
+          <ColorPicker />
+          <TitleLabel>
+            <TitleInput placeholder={'Your title here'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
+          </TitleLabel>
+          <Buttons>
+            <Button onClick={ clear }>Clear</Button>
+            <Button onClick={ cancel }>Cancel</Button>
+            <Button type="submit" value="Save">Save</Button>
+          </Buttons>
+        </Header>
         <label>
-          <input placeholder={'Title'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
+          <Editor
+            apiKey='5yuasqcbf0nhgogvvsnlrrecdsxxyis9dwv7s68u8avgluqd'
+            value={noteData.note}
+            init={{
+              placeholder:'Your note here',
+              height: 300,
+              menubar: false,
+              forced_root_block : false,
+            }}
+            onEditorChange={ handleChange }
+          />
         </label>
-        <Division />
-        <label>
-          <textarea placeholder={'Your note here'} value={noteData.note} onChange={(ev) => setNoteData({ ...noteData, note: ev.target.value})} />
-        </label>
-        <ColorPicker />
         <NoteImageWrapper>
           {/* <FileBase
             type="file"
@@ -93,9 +115,6 @@ const Form = () => {
             onDone={({ base64 }) => setNoteData({ ...noteData, selectedFile: base64})}
           /> */}
         </NoteImageWrapper>
-        <Button onClick={ clear }>Clear</Button>
-        <Button onClick={ cancel }>Cancel</Button>
-        <SaveButton type="submit" value="Save">Save</SaveButton>
       </NoteForm>
     </>
   )
@@ -108,24 +127,38 @@ const NoteForm = styled.form`
   height: 100%;
 `;
 
-const Division = styled.div`
-  border-bottom: 1px solid grey;
-  /* width: 80%;
-  align-self: center; */
-  margin: 10px;
-`;
-
 const NoteImageWrapper = styled.div`
   display: flex;
   align-items: baseline;
 `;
 
-const SaveButton = styled(Button)`
-
+const Header = styled.div`
+  display: flex;
+  margin: 0 0 1rem 0;
 `;
 
-// const Button = styled.button`
+const TitleLabel = styled.label`
+  display: flex;
+  margin-left: auto;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-right: 1rem;
+`;
 
-// `;
+const TitleInput = styled.input`
+  border: none;
+
+  &:focus{
+    /* border: none; */
+    outline: none;
+  }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  margin-left: auto;
+  gap: 0.3rem;
+`;
 
 export default Form;

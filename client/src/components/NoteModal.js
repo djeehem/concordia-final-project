@@ -39,9 +39,12 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 60%;
-  width: 60%;
+  height: 90%;
+  width: 80%;
   padding: 20px;
+  border: 0.2rem solid #DCDCDC;
+  border-radius: 1rem;
+  box-shadow: 0 0.7rem 1.2rem rgba(0, 0, 0, 0.2);
 `;
 
 export default NoteModal;

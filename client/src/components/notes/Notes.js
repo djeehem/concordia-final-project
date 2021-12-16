@@ -17,7 +17,10 @@ const Notes = SortableContainer(({ listNote}) => {
         .sort((a, b) => a.position - b.position)
         .map((value, index) => (
           <Note
-            key={value._id} index={index} value={value}
+            key={value._id}
+            index={index}
+            value={value}
+            dangerouslySetInnerHTML={{ __html: value.note}}
           />
         ))
       }

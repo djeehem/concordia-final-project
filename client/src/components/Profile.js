@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import { useAuth0 } from "@auth0/auth0-react";
 
 import { NoteContext } from './NoteContext';
 
@@ -9,7 +8,6 @@ const Profile = () => {
     userIsAuthenticated,
     userIsLoading
   } = useContext(NoteContext);
-  // const { user, isAuthenticated, isLoading } = useAuth0();
 
   if (userIsLoading) {
     return <div>Loading ...</div>;

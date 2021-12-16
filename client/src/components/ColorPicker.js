@@ -16,7 +16,7 @@ const ColorPicker = () => {
   console.log(noteData)
 
   return (
-    <div>
+    <Wrapper>
       <ColorButton
         onClick={(ev) => {
           ev.preventDefault();
@@ -26,18 +26,31 @@ const ColorPicker = () => {
         {showColorPicker ? 'Close' : 'Pick a color'}
       </ColorButton>
       {showColorPicker && (
-        <CirclePicker
-          onChange={(ev) => {
-            setNoteData({ ...noteData, noteColor: ev.hex})
-          }}
-        />
+        <PickerWrapper>
+          <CirclePicker
+            onChange={(ev) => {
+              setNoteData({ ...noteData, noteColor: ev.hex})
+            }}
+          />
+        </PickerWrapper>
       )}
-      <h2>Color: {noteData.noteColor}</h2>
-    </div>
+      {/* <h2>Color: {noteData.noteColor}</h2> */}
+    </Wrapper>
   )
 };
+
+const Wrapper = styled.div`
+  position: relative;
+`;
+
 const ColorButton = styled(Button)`
 
+`;
+
+const PickerWrapper = styled.div`
+  z-index: 10;
+  background: white;
+  position: absolute;
 `;
 
 export default ColorPicker;
