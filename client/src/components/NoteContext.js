@@ -98,6 +98,11 @@ export const NoteProvider = ({ children }) => {
     }
   }, [user])
 
+  const [value, setValue] = useState('');
+  const [suggestionList, setSuggestionList] = useState([]);
+
+  const suggestions = notes;
+
   return (
     <NoteContext.Provider
       value={{
@@ -117,7 +122,12 @@ export const NoteProvider = ({ children }) => {
         noteData,
         setNoteData,
         color,
-        setColor
+        setColor,
+        value,
+        setValue,
+        suggestionList,
+        setSuggestionList,
+        suggestions
       }}
     >
       {children}
