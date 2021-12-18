@@ -9,23 +9,19 @@ import { NoteContext } from "./NoteContext";
 
 const NoteList = () => {
   const { notes } = useContext(NoteContext);
+  
 
   const [listNote, setListNote] = useState(notes);
-
-  console.log(notes);
-  console.log(listNote);
-
   const onSortEnd = ({ oldIndex, newIndex }) => {
     let arr = arrayMoveImmutable(notes, oldIndex, newIndex);
     for (let i = 0; i < arr.length; i++) {
       arr[i].position = i;
+      // console.log(arr)
     }
-    console.log(arr)
+    
     setListNote(arr);
-    console.log(listNote);
+    console.log(notes)
   };
-
-  console.log(listNote);
 
   return (
     <Notes notes={listNote} onSortEnd={onSortEnd} axis="xy" />

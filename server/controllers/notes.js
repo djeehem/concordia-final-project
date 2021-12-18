@@ -69,4 +69,9 @@ const deleteNote = async (req, res) => {
   });
 };
 
-export { getNotes, createNote, updateNote, deleteNote };
+export { 
+  getNotes, 
+  createNote, 
+  updateNote, 
+  deleteNote 
+};

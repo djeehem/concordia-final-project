@@ -24,8 +24,6 @@ const Note = SortableElement(({ value }) => {
     setModalOpen(true);
   }
 
-  console.log(value)
-
   return (
     // <Image src={value.selectedFile} />
     <Card
@@ -88,7 +86,6 @@ const Division = styled.div`
 `;
 
 const CardText = styled.div`
-  display: flex;
   font-size: 1.6rem;
   margin: 1rem;
 `;

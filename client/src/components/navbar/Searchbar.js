@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { NoteContext } from '../NoteContext';
@@ -8,10 +8,8 @@ const Searchbar = () => {
   const {
     value,
     setValue,
-    suggestionList,
     setSuggestionList,
     suggestions,
-    notes
   } = useContext(NoteContext);
 
   const handleChange = e => {
@@ -23,6 +21,11 @@ const Searchbar = () => {
     } else {
       setSuggestionList([]);
     }
+  }
+
+  const handleClick = (ev) => {
+    // ev.preventDefault();
+    setValue('')
   }
 
   return (
@@ -37,13 +40,11 @@ const Searchbar = () => {
           //   }
           // }}
         />
-        <Button onClick={() => setValue('')}>Clear</Button>
+        <Button onClick={ handleClick }>Clear</Button>
       </StyledForm>
     </Wrapper>  
   )
 };
-
-export default Searchbar;
 
 const Wrapper = styled.div`
   display: flex;
@@ -69,24 +70,4 @@ const StyledInput = styled.input`
   }
 `;
 
-const Prediction = styled.span`
-  font-weight: bold;
-`;
-
-const ListWrapper = styled.div`
-  margin-top: 10px;
-  box-shadow: 0px 0px 10px 0px #ccc;
-`;
-
-const SuggestionList = styled.ul`
-  margin: 10px;
-`;
-
-const SuggestionItem = styled.li`
-  padding: 10px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(245, 236, 137, 0.3);
-  }
-`;
+export default Searchbar;

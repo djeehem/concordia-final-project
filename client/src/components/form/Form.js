@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Editor } from "@tinymce/tinymce-react";
 import FileBase from 'react-file-base64';
 import styled from 'styled-components';
@@ -20,12 +20,8 @@ const Form = () => {
     getNotes,
     setModalOpen,
     noteData,
-    setNoteData,
-    color
+    setNoteData
   } = useContext(NoteContext);
-  
-  // const message = noteData.note;
-  // console.log({message})
 
   const noteToUpdate = notes.find(note => note._id === currentId);
 
@@ -33,7 +29,7 @@ const Form = () => {
     if (noteToUpdate) {
       setNoteData(noteToUpdate);
     }
-  }, [noteToUpdate]);
+  }, [setNoteData, noteToUpdate]);
 
   const clear = () => {
     setCurrentId(null)

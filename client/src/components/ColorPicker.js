@@ -13,8 +13,6 @@ const ColorPicker = () => {
 
   const [showColorPicker, setShowColorPicker] = useState(false);
 
-  console.log(noteData)
-
   return (
     <Wrapper>
       <ColorButton
@@ -29,12 +27,11 @@ const ColorPicker = () => {
         <PickerWrapper>
           <CirclePicker
             onChange={(ev) => {
-              setNoteData({ ...noteData, noteColor: ev.hex})
+              setNoteData({ ...noteData, noteColor: ev.hex })
             }}
           />
         </PickerWrapper>
       )}
-      {/* <h2>Color: {noteData.noteColor}</h2> */}
     </Wrapper>
   )
 };

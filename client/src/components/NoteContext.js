@@ -2,7 +2,12 @@ import React, {createContext, useReducer, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { fetchNotes } from '../api/index';
-import { GET_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE, UPDATE_NOTE_POSITION } from '../constants/actionsTypes';
+import {
+  GET_NOTES,
+  CREATE_NOTE,
+  UPDATE_NOTE,
+  DELETE_NOTE,
+  UPDATE_NOTE_POSITIONS } from '../constants/actionsTypes';
 
 export const NoteContext = createContext(null);
 
@@ -25,7 +30,7 @@ const reducer = (notes, action) => {
     case DELETE_NOTE:{
       return notes.filter(note => note._id !== action.payload);
     }
-    case UPDATE_NOTE_POSITION:{
+    case UPDATE_NOTE_POSITIONS:{
       return notes.map
     }
 
@@ -71,9 +76,9 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
-  const updateNotePosition = (data) => {
+  const updateNotePositions = (data) => {
     dispatch({
-      type: UPDATE_NOTE_POSITION,
+      type: UPDATE_NOTE_POSITIONS,
       payload: data
     })
   };
@@ -113,7 +118,7 @@ export const NoteProvider = ({ children }) => {
         currentId,
         setCurrentId,
         deleteNote,
-        updateNotePosition,
+        updateNotePositions,
         currentUser: user,
         userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading,
