@@ -3,9 +3,9 @@ import { Editor } from "@tinymce/tinymce-react";
 import FileBase from 'react-file-base64';
 import styled from 'styled-components';
 
-import { addNote, modifyNote } from '../../api/index'
+import { createNoteApi, updateNoteApi } from '../../api/index'
 import { NoteContext } from '../NoteContext';
-import { fetchNotes } from '../../api/index';
+import { getNotesApi } from '../../api/index';
 import ColorPicker from '../ColorPicker';
 import Button from '../Button'
 
@@ -57,16 +57,16 @@ const Form = () => {
     if (noteData.title || noteData.note) {
       if (currentId === null) {
 
-        addNote({...noteData, email: currentUser.email, position: notes.length})
-          .then(data => {
-          createNote(data.data)
-        })
-        .then(() => fetchNotes(currentUser.email))
+        createNoteApi({...noteData, email: currentUser.email, position: notes.length})
+        //   .then(data => {
+        //   createNote(data.data)
+        // })
+        .then(() => getNotesApi(currentUser.email))
         .then(data => {
           getNotes(data.data)
         })
       } else {
-        modifyNote(currentId, noteData)
+        updateNoteApi(currentId, noteData)
           .then(data => {
           updateNote(data.data)
         })
@@ -77,42 +77,39 @@ const Form = () => {
   }
 
   return (
-    <>
-    {/* <h1>{ currentId ? 'Edit' : 'Create' } note</h1> */}
-      <NoteForm onSubmit={ handleSubmit }>
-        <Header>
-          <ColorPicker />
-          <TitleLabel>
-            <TitleInput placeholder={'Your title here'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
-          </TitleLabel>
-          <Buttons>
-            <Button onClick={ clear }>Clear</Button>
-            <Button onClick={ cancel }>Cancel</Button>
-            <Button type="submit" value="Save">Save</Button>
-          </Buttons>
-        </Header>
-        <label>
-          <Editor
-            apiKey='5yuasqcbf0nhgogvvsnlrrecdsxxyis9dwv7s68u8avgluqd'
-            value={noteData.note}
-            init={{
-              placeholder:'Your note here',
-              height: 300,
-              menubar: false,
-              forced_root_block : false,
-            }}
-            onEditorChange={ handleChange }
-          />
-        </label>
-        <NoteImageWrapper>
-          {/* <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) => setNoteData({ ...noteData, selectedFile: base64})}
-          /> */}
-        </NoteImageWrapper>
-      </NoteForm>
-    </>
+    <NoteForm onSubmit={ handleSubmit }>
+      <Header>
+        <ColorPicker />
+        <TitleLabel>
+          <TitleInput placeholder={'Your title here'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
+        </TitleLabel>
+        <Buttons>
+          <Button onClick={ clear }>Clear</Button>
+          <Button onClick={ cancel }>Cancel</Button>
+          <Button type="submit" value="Save">Save</Button>
+        </Buttons>
+      </Header>
+      <label>
+        <Editor
+          apiKey='5yuasqcbf0nhgogvvsnlrrecdsxxyis9dwv7s68u8avgluqd'
+          value={noteData.note}
+          init={{
+            placeholder:'Your note here',
+            height: 300,
+            menubar: false,
+            forced_root_block : false,
+          }}
+          onEditorChange={ handleChange }
+        />
+      </label>
+      <NoteImageWrapper>
+        {/* <FileBase
+          type="file"
+          multiple={false}
+          onDone={({ base64 }) => setNoteData({ ...noteData, selectedFile: base64})}
+        /> */}
+      </NoteImageWrapper>
+    </NoteForm>
   )
 }
 

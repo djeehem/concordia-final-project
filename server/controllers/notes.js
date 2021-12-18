@@ -6,7 +6,6 @@ const getNotes = async (req, res) => {
   const email = req.params;
   try {
     const postNotes = await PostNote.find(email).exec();
-    // const postNotes = await PostNote.find();
 
     res.status(200).json({
       status: 200,

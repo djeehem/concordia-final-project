@@ -1,7 +1,7 @@
 import React, {createContext, useReducer, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { fetchNotes } from '../api/index';
+import { getNotesApi } from '../api/index';
 import {
   GET_NOTES,
   CREATE_NOTE,
@@ -76,7 +76,7 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
-  const updateNotePositions = (data) => {
+  const updateNotePositionsApi = (data) => {
     dispatch({
       type: UPDATE_NOTE_POSITIONS,
       payload: data
@@ -96,7 +96,7 @@ export const NoteProvider = ({ children }) => {
   useEffect(() => {
     if (user !== undefined) {
       const email = user.email
-      fetchNotes(email)
+      getNotesApi(email)
       .then(data => {
         getNotes(data.data)
       })
@@ -118,7 +118,7 @@ export const NoteProvider = ({ children }) => {
         currentId,
         setCurrentId,
         deleteNote,
-        updateNotePositions,
+        updateNotePositionsApi,
         currentUser: user,
         userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading,

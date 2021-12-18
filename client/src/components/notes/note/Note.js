@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { SortableElement } from "react-sortable-hoc";
 import ReactHtmlParser from "react-html-parser";
 
-import { removeNote } from '../../../api'
+import { deleteNoteApi } from '../../../api'
 import { NoteContext } from '../../NoteContext';
 import Button from '../../Button';
 
@@ -15,7 +15,7 @@ const Note = SortableElement(({ value }) => {
   } = useContext(NoteContext);
 
   const handleDelete = () => {
-    removeNote(value._id);
+    deleteNoteApi(value._id);
     deleteNote(value._id);
   }
 
