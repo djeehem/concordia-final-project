@@ -9,12 +9,20 @@ import Button from '../Button';
 import Searchbar from "./Searchbar";
 
 const Navbar = () => {
-  const { setModalOpen, currentUser } = useContext(NoteContext);
+  const { 
+    setModalOpen, 
+    currentUser,
+    isCollapsed, 
+    setIsCollapsed
+  } = useContext(NoteContext);
 
   return (
     <Wrapper>
       <InnerWrapper>
         <Button onClick={ () => setModalOpen(true) }>Create note</Button>
+        <Button onClick={ () => {
+          setIsCollapsed(isCollapsed => !isCollapsed)}
+        }>{ isCollapsed ? 'Expand All' : 'Collapse All' }</Button>
         <Searchbar />
         <Toolbar>
           {currentUser ? 

@@ -1,30 +1,27 @@
-import React, { useContext, useState } from "react";
-// import { SortableContainer, arrayMove } from "react-sortable-hoc";
+import React, { useContext } from "react";
 import { arrayMoveImmutable} from "array-move";
 
 import Notes from '../components/notes/Notes'
 import { NoteContext } from "./NoteContext";
-
-
+import FilteredNotes from "./notes/FilteredNotes";
 
 const NoteList = () => {
-  const { notes } = useContext(NoteContext);
-  
+  const {
+    value,
+    notes,
+    updateNotePositions
+  } = useContext(NoteContext);
 
-  const [listNote, setListNote] = useState(notes);
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    let arr = arrayMoveImmutable(notes, oldIndex, newIndex);
-    for (let i = 0; i < arr.length; i++) {
-      arr[i].position = i;
-      // console.log(arr)
-    }
-    
-    setListNote(arr);
-    console.log(notes)
-  };
+    const onSortEnd = ({oldIndex, newIndex}) => {
+      updateNotePositions(
+        arrayMoveImmutable(notes, oldIndex, newIndex),
+      );
+    };
 
   return (
-    <Notes notes={listNote} onSortEnd={onSortEnd} axis="xy" />
+    value.length < 2 ?
+    <Notes onSortEnd={onSortEnd} axis="xy" /> :
+    <FilteredNotes />
   )
 };
 

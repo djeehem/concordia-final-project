@@ -31,7 +31,7 @@ const reducer = (notes, action) => {
       return notes.filter(note => note._id !== action.payload);
     }
     case UPDATE_NOTE_POSITIONS:{
-      return notes.map
+      return action.payload
     }
 
     default:
@@ -76,7 +76,7 @@ export const NoteProvider = ({ children }) => {
     })
   };
 
-  const updateNotePositionsApi = (data) => {
+  const updateNotePositions = (data) => {
     dispatch({
       type: UPDATE_NOTE_POSITIONS,
       payload: data
@@ -104,7 +104,10 @@ export const NoteProvider = ({ children }) => {
   }, [user])
 
   const [value, setValue] = useState('');
+
   const [suggestionList, setSuggestionList] = useState([]);
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const suggestions = notes;
 
@@ -118,7 +121,7 @@ export const NoteProvider = ({ children }) => {
         currentId,
         setCurrentId,
         deleteNote,
-        updateNotePositionsApi,
+        updateNotePositions,
         currentUser: user,
         userIsAuthenticated :isAuthenticated,
         userIsLoading: isLoading,
@@ -132,7 +135,9 @@ export const NoteProvider = ({ children }) => {
         setValue,
         suggestionList,
         setSuggestionList,
-        suggestions
+        suggestions,
+        isCollapsed, 
+        setIsCollapsed
       }}
     >
       {children}
