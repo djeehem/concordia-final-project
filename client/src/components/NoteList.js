@@ -12,11 +12,11 @@ const NoteList = () => {
     updateNotePositions
   } = useContext(NoteContext);
 
-    const onSortEnd = ({oldIndex, newIndex}) => {
-      updateNotePositions(
-        arrayMoveImmutable(notes, oldIndex, newIndex),
-      );
-    };
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    updateNotePositions(
+      arrayMoveImmutable(notes, oldIndex, newIndex),
+    );
+  };
 
   return (
     value.length < 2 ?

@@ -31,7 +31,15 @@ const reducer = (notes, action) => {
       return notes.filter(note => note._id !== action.payload);
     }
     case UPDATE_NOTE_POSITIONS:{
-      return action.payload
+      // for (let i = 0; i < action.payload.length; i++) {
+      //   action.payload[i].position = i;
+      // }
+      // return action.payload
+
+      action.payload.map((item, index) => {
+        item.position = index;
+      })
+      return action.payload;
     }
 
     default:

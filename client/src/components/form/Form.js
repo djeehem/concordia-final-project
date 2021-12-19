@@ -81,7 +81,13 @@ const Form = () => {
       <Header>
         <ColorPicker />
         <TitleLabel>
-          <TitleInput placeholder={'Your title here'} type="text" name="title" value={noteData.title} onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })} />
+          <TitleInput
+            placeholder={'Your title here'}
+            type="text"
+            name="title"
+            value={noteData.title}
+            onChange={(ev) => setNoteData({ ...noteData, title: ev.target.value })}
+          />
         </TitleLabel>
         <Buttons>
           <Button onClick={ clear }>Clear</Button>
