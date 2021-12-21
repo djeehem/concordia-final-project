@@ -6,16 +6,16 @@ import Button from '../Button';
 
 const Searchbar = () => {
   const {
-    value,
-    setValue,
+    searchValue, 
+    setSearchValue,
     setSuggestionList,
     suggestions,
   } = useContext(NoteContext);
 
   const handleChange = e => {
-    setValue(e.target.value);
-    console.log(value)
-    if (e.target.value.length >= 2) {
+    setSearchValue(e.target.value);
+    console.log(searchValue)
+    if (e.target.value.length > 1) {
       setSuggestionList(suggestions.filter(suggestion =>
         suggestion.title.toLowerCase().includes(e.target.value.toLowerCase()) || suggestion.note.toLowerCase().includes(e.target.value.toLowerCase())))
     } else {
@@ -25,12 +25,11 @@ const Searchbar = () => {
 
   const handleClick = (ev) => {
     // ev.preventDefault();
-    setValue('')
+    setSearchValue('')
   }
 
   return (
     <Wrapper>
-      <StyledForm>
         <StyledInput
           type='text'
           onChange = {e => handleChange(e)}
@@ -41,21 +40,14 @@ const Searchbar = () => {
           // }}
         />
         <Button onClick={ handleClick }>Clear</Button>
-      </StyledForm>
     </Wrapper>  
   )
 };
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  margin-right: auto;
   width: 50%;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  width:100%;
-  gap: 10px;
 `;
 
 const StyledInput = styled.input`

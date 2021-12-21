@@ -18,7 +18,7 @@ const Notes = SortableContainer(() => {
   return (
     <>
       { isCollapsed ?
-        <List>
+        <Grid>
           {notes.map((value, index) => (              
               <CollapsedNote
                 key={value._id}
@@ -27,7 +27,7 @@ const Notes = SortableContainer(() => {
               />
             ))
           }
-        </List> :
+        </Grid> :
         <Grid>
           {notes.map((value, index) => (
               <Note
@@ -35,20 +35,19 @@ const Notes = SortableContainer(() => {
                 index={index}
                 value={value}
               />
-            ))
-          }
+          ))}
         </Grid>
       }
     </>
   )
 });
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 3rem;
-  background-color: #f7f7f7;
-`;
+// const List = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   margin: 3rem;
+//   background-color: #f7f7f7;
+// `;
 
 const Grid = styled.div`
   display: grid;

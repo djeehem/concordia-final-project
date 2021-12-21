@@ -111,7 +111,7 @@ export const NoteProvider = ({ children }) => {
     }
   }, [user])
 
-  const [value, setValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const [suggestionList, setSuggestionList] = useState([]);
 
@@ -139,8 +139,8 @@ export const NoteProvider = ({ children }) => {
         setNoteData,
         color,
         setColor,
-        value,
-        setValue,
+        searchValue, 
+        setSearchValue,
         suggestionList,
         setSuggestionList,
         suggestions,

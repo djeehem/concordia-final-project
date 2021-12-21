@@ -7,7 +7,7 @@ import FilteredNotes from "./notes/FilteredNotes";
 
 const NoteList = () => {
   const {
-    value,
+    searchValue,
     notes,
     updateNotePositions
   } = useContext(NoteContext);
@@ -19,7 +19,7 @@ const NoteList = () => {
   };
 
   return (
-    value.length < 2 ?
+    searchValue.length < 2 ?
     <Notes onSortEnd={onSortEnd} axis="xy" /> :
     <FilteredNotes />
   )

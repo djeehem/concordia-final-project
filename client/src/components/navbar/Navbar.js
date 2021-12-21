@@ -18,37 +18,54 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <InnerWrapper>
+      <Buttons>
         <Button onClick={ () => setModalOpen(true) }>Create note</Button>
-        <Button onClick={ () => {
-          setIsCollapsed(isCollapsed => !isCollapsed)}
-        }>{ isCollapsed ? 'Expand All' : 'Collapse All' }</Button>
-        <Searchbar />
-        <Toolbar>
-          {currentUser ? 
-          <>
-            <LogoutButton />
-            <Profile />
-          </> : 
-            <LoginButton />
-          }
-        </Toolbar>
-      </InnerWrapper>
+        <Button onClick={ () => { setIsCollapsed(isCollapsed => !isCollapsed) }}>
+          { isCollapsed ? 'Expand All' : 'Collapse All' }
+        </Button>
+      </Buttons>
+      <Searchbar />
+      <Toolbar>
+        {currentUser ? 
+        <>
+          <LogoutButton />
+          <UserPicture 
+            src={currentUser.picture}
+            alt={currentUser.nickname}
+            // onClick={}
+          />
+          {/* <Profile /> */}
+        </> : 
+          <LoginButton />
+        }
+      </Toolbar>
     </Wrapper>
   )
 };
 
 const Wrapper = styled.header`
   height: 5rem;
-`;
-
-const InnerWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
   margin: 2rem;
   align-items: center;
+  
 `;
 
-const Toolbar = styled.div``;
+const Buttons = styled.div`
+  display: flex;
+  margin-right: auto;
+  gap: 0.3rem;
+`;
+
+const UserPicture = styled.img`
+  height: 5rem;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+`;
+
+const Toolbar = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default Navbar;
