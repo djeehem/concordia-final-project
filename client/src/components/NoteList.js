@@ -4,6 +4,7 @@ import { arrayMoveImmutable} from "array-move";
 import Notes from '../components/notes/Notes'
 import { NoteContext } from "./NoteContext";
 import FilteredNotes from "./notes/FilteredNotes";
+import { updateNotePositionsApi } from '../api/index'
 
 const NoteList = () => {
   const {
@@ -12,10 +13,12 @@ const NoteList = () => {
     updateNotePositions
   } = useContext(NoteContext);
 
-  const onSortEnd = ({oldIndex, newIndex}) => {
+  const onSortEnd = async ({oldIndex, newIndex}) => {
     updateNotePositions(
       arrayMoveImmutable(notes, oldIndex, newIndex),
     );
+    updateNotePositionsApi(notes);
+    console.log(notes)
   };
 
   return (

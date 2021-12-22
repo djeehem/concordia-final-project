@@ -73,16 +73,15 @@ const deleteNote = async (req, res) => {
 };
 
 const updateNotePositions = async (req, res) => {
-  // const { notes } = req.body;
+  const notes = req.body;
 
-  // await notes.map((note, index) => {
-
-  //   PostNote.updateOne(
-  //     { _id: note._id }, 
-  //     { $set: { position: position } }
-  //   );
-  
-  // });
+  await notes.map( async (note) => {
+    console.log(notes)
+    await PostNote.updateOne(
+      { _id: note._id }, 
+      { $set: { position: note.position } }
+    );
+  });
 };
 
 export { 
