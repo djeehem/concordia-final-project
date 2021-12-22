@@ -25,6 +25,10 @@ const createNote = async (req, res) => {
   const newNote = new PostNote(note);
   
   try {
+    await PostNote.updateMany(
+      {}, { $inc: { position: 1 }} 
+    );
+
     await newNote.save();
 
     res.status(201).json({
@@ -68,9 +72,23 @@ const deleteNote = async (req, res) => {
   });
 };
 
+const updateNotePositions = async (req, res) => {
+  // const { notes } = req.body;
+
+  // await notes.map((note, index) => {
+
+  //   PostNote.updateOne(
+  //     { _id: note._id }, 
+  //     { $set: { position: position } }
+  //   );
+  
+  // });
+};
+
 export { 
   getNotes, 
   createNote, 
   updateNote, 
-  deleteNote 
+  deleteNote,
+  updateNotePositions
 };

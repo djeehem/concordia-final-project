@@ -6,9 +6,16 @@ import Button from "../Button";
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
-  return <ButtonLogIn onClick={() => loginWithRedirect()}>Log In</ButtonLogIn>;
+  return (
+    <ButtonLogIn onClick={() => loginWithRedirect()}>
+      <span>Log In</span>
+    </ButtonLogIn>
+  );
 };
 
-const ButtonLogIn = styled(Button)``;
+const ButtonLogIn = styled(Button)`
+  display: flex;
+  font-size: 2rem;
+`;
 
 export default LoginButton;

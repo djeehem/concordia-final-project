@@ -16,10 +16,12 @@ const initialState = [];
 const reducer = (notes, action) => {
   switch(action.type) {
     case GET_NOTES: {
-      return action.payload;
+      return action.payload.sort((a, b) => {
+        return a.position - b.position
+      });
     }
     case CREATE_NOTE: {
-      return [...notes, action.payload];
+      return [action.payload, ...notes];
     }
     case UPDATE_NOTE:{
       return notes.map(note => note._id === action.payload._id ?
@@ -37,7 +39,7 @@ const reducer = (notes, action) => {
       // return action.payload
 
       action.payload.map((item, index) => {
-        item.position = index;
+        return item.position = index;
       })
       return action.payload;
     }
@@ -117,8 +119,6 @@ export const NoteProvider = ({ children }) => {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const suggestions = notes;
-
   return (
     <NoteContext.Provider
       value={{
@@ -143,7 +143,6 @@ export const NoteProvider = ({ children }) => {
         setSearchValue,
         suggestionList,
         setSuggestionList,
-        suggestions,
         isCollapsed, 
         setIsCollapsed
       }}

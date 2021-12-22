@@ -20,7 +20,9 @@ const Form = () => {
     getNotes,
     setModalOpen,
     noteData,
-    setNoteData
+    setNoteData,
+    searchValue, 
+    setSearchValue,
   } = useContext(NoteContext);
 
   const noteToUpdate = notes.find(note => note._id === currentId);
@@ -57,7 +59,11 @@ const Form = () => {
     if (noteData.title || noteData.note) {
       if (currentId === null) {
 
-        createNoteApi({...noteData, email: currentUser.email, position: notes.length})
+        createNoteApi({
+          ...noteData, 
+          email: currentUser.email, 
+          position: 0
+        })
         //   .then(data => {
         //   createNote(data.data)
         // })
@@ -72,6 +78,7 @@ const Form = () => {
         })
       }
       clear();
+      setSearchValue(searchValue);
       setModalOpen(false);
     }
   }
@@ -103,7 +110,7 @@ const Form = () => {
             placeholder:'Your note here',
             height: 300,
             menubar: false,
-            forced_root_block : false,
+            // forced_root_block : false,
           }}
           onEditorChange={ handleChange }
         />

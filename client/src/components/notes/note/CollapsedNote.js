@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { SortableElement } from "react-sortable-hoc";
-import ReactHtmlParser from "react-html-parser";
 
 import { deleteNoteApi } from '../../../api'
 import { NoteContext } from '../../NoteContext';

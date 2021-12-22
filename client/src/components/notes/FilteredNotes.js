@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { SortableContainer } from "react-sortable-hoc";
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import FilteredNote from './note/FilteredNote'
@@ -16,7 +15,7 @@ const FilteredNotes = () => {
   return (
     <>
       { isCollapsed ?
-        <List>
+        <Grid>
           {suggestionList.map((value, index) => (              
               <FilteredCollapsedNote
                 key={value._id}
@@ -25,7 +24,7 @@ const FilteredNotes = () => {
               />
             ))
           }
-        </List> :
+        </Grid> :
         <Grid>
           {suggestionList.map((value, index) => (
               <FilteredNote
@@ -41,12 +40,12 @@ const FilteredNotes = () => {
   )
 }
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 3rem;
-  background-color: #f7f7f7;
-`;
+// const List = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   margin: 3rem;
+//   background-color: #f7f7f7;
+// `;
 
 const Grid = styled.div`
   display: grid;
