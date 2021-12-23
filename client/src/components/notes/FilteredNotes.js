@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 
 import FilteredNote from './note/FilteredNote'
 import FilteredCollapsedNote from './note/FilteredCollapsedNote';

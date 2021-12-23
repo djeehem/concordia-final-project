@@ -76,7 +76,7 @@ const updateNotePositions = async (req, res) => {
   const notes = req.body;
 
   await notes.map( async (note) => {
-    console.log(notes)
+
     await PostNote.updateOne(
       { _id: note._id }, 
       { $set: { position: note.position } }

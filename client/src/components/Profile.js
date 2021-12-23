@@ -5,16 +5,16 @@ import { NoteContext } from './NoteContext';
 const Profile = () => {
   const {
     currentUser,
-    userIsAuthenticated,
-    userIsLoading
+    isAuthenticated,
+    isLoading
   } = useContext(NoteContext);
 
-  if (userIsLoading) {
+  if (isLoading) {
     return <div>Loading ...</div>;
   }
 
   return (
-    userIsAuthenticated && (
+    isAuthenticated && (
       <div>
         {/* <h2>{currentUser.nickname}</h2> */}
         <img src={currentUser.picture}/>
